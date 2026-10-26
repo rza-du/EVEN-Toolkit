@@ -16,7 +16,7 @@ README naming the upload button for every file.
 | `MG_supply_demand.mat` | Community | `MG_Load` 8760x8, and `MG_Supply1` 8760x3, `MG_Supply2` 8760x4, `MG_Supply3` 8760x4. Hourly microgrid demand and three supply scenarios, in kWh. |
 | `HH_Load_demo400.mat` | Community | `household_demand`, 8760x400, hourly demand per household in kWh. **Reduced demo subset**, see below. |
 | `HH_PV_supply2_demo400.mat` | Community | `PV_supply`, 8760x400, hourly PV generation per household in kWh. **Reduced demo subset**, see below. |
-| `Parametric_GroupA/B/C.mat` | Community | `OUTPUT_paramatric_PartA`, pre-computed parametric sweep results loaded by the Parametric tab. |
+
 
 ## The reduced community dataset
 
