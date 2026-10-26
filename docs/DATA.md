@@ -29,13 +29,6 @@ the absolute annual energy figures are smaller than those in the published
 study, because the community is smaller. The number of simulated households
 is `round(400 * EV_penetration)` rather than `round(5357 * EV_penetration)`.
 
-The full 5357-household dataset is archived separately:
-
-> `[Zenodo dataset DOI to be added]`
-
-To reproduce the published results, download the full files and select them
-in the community module's upload dialogs, or pass their paths to
-`even_run_scenario`.
 
 ## Using your own data
 
