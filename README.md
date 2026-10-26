@@ -98,31 +98,36 @@ The bundled `input_files/community/parametric_results/Parametric_Group*.mat` fil
 ## Repository structure
 
 ```
-src/         All MATLAB code and the three selector images.
-             Keep these files together: the applications locate their
-             dependencies and images in their own folder.
-  Main_Scenario_Selector_App_Visual.m   Launcher with the three cards
-  V2H_GUI_App.m                         Household module
-  Clinic_Backup_GUI_App.m               Critical infrastructure module
-  Community_Microgrid_GUI_App.m         Community module
-  V2H_EconomicSimulator_HourlySOC.m     Household simulation engine
-  simulate_clinic_backup.m              Clinic simulation engine
-  even_run_scenario.m                   Community engine entry point
-  even_run_parametric.m                 Generates the community parametric studies
-  even_annual_simulation.m              Community annual simulation
-  even_parameters.m                    All regional constants
-  even_radar_plot.m                     Radar charts for the sensitivity tabs
-  f_*.m, func_*.m                       Engine helpers
-input_files/ Input data, one folder per simulator (see docs/DATA.md):
-  household/                Load profiles for the house module
-  critical_infrastructure/  Clinic load and household solar surplus
-  community/                Microgrid and household data (demo subset)
-    parametric_results/     Published parametric studies
-results/     Created when parametric studies are generated; not tracked by git.
-docs/        API.md   Full argument and output reference for the engines
-             DATA.md  Input file specification
-tests/       Smoke tests.
+EVEN-Toolkit/
+├── src/                            MATLAB code — keep all files together
+├── input_files/                    Input data, one folder per simulator
+│   ├── household/                  Load profiles
+│   ├── critical_infrastructure/    Clinic load and household solar surplus
+│   └── community/                  Microgrid and household data (demo subset)
+│       └── parametric_results/     Published parametric studies
+├── docs/                           API.md and DATA.md
+├── results/                        Created when you generate parametric studies
+├── README.md
+├── CITATION.cff
+└── LICENSE
 ```
+
+### Main files in `src/`
+
+| File | Purpose |
+|---|---|
+| `Main_Scenario_Selector_App_Visual.m` | Launcher with the three cards — start here |
+| `V2H_GUI_App.m` | Single Family House module |
+| `Clinic_Backup_GUI_App.m` | Critical Infrastructure module |
+| `Community_Microgrid_GUI_App.m` | Municipality / Community module |
+| `V2H_EconomicSimulator_HourlySOC.m` | Household simulation engine |
+| `simulate_clinic_backup.m` | Clinic simulation engine |
+| `even_run_scenario.m` | Community simulation, one scenario |
+| `even_run_parametric.m` | Community parametric studies (Groups A, B, C) |
+| `even_annual_simulation.m` | Community annual model, called by the two above |
+| `even_parameters.m` | All regional constants (prices, efficiencies, limits) |
+| `even_radar_plot.m` | Radar charts for the sensitivity tabs |
+| `f_*.m`, `func_*.m` | Helpers: battery dispatch, energy trading, degradation |
 
 ## Documentation
 
