@@ -1,4 +1,4 @@
-a# EVEN Toolkit
+# EVEN Toolkit
 
 **Electric Vehicle based virtual Electricity Network — a simulation suite for EV-based power supply resilience**
 
