@@ -53,6 +53,11 @@ if ~exist('scenario_auction','var'),    scenario_auction    = 2;    end
 
 % derive number of houses for each simulation % Extract scenario ratios for PV_B, OnlyPV, and NoPV
 num_houses =round(size(HH_demand_col, 2)*EV_PenetrationLevel);
+if num_houses < 1
+    error('even:NoHouseholds', ['EV penetration of %g %% of %d households gives no participating ' ...
+        'households. Increase the EV penetration to at least %.2f %%.'], ...
+        100*EV_PenetrationLevel, size(HH_demand_col, 2), ceil(100*100*0.5/size(HH_demand_col, 2))/100);
+end
 Num_PV_B = round(Battery_penetration*PV_penetration*num_houses);
 Num_PVOnly = round(PV_penetration*num_houses)-Num_PV_B;
 Num_NoPV= num_houses-(Num_PV_B+Num_PVOnly);
@@ -134,7 +139,7 @@ MG_Balance_daily=(sum(reshape(MG_supply-MG_demand-MG_B_e_cha_disch_ext,24,365)))
             
                  cat2_EnergyDeliveryPotential_daily_Suplus_max = max(0,eff_EVB_round * (cat2_EnergyBalance_daily(:,k) - EV_travel - EV_travel_MG)); % Calculate the maximum surplus energy delivery potential for each consumer
                  cat2_EnergyDeliveryPotential_daily_EVBattery_max= eff_EVB_round* (EVB*(1-SoCEVBmin)- EV_travel-EV_travel_MG);
-                 cat2_EnergyDeliveryPotential_daily(:,j)=min(cat2_EnergyDeliveryPotential_daily_Suplus_max,cat2_EnergyDeliveryPotential_daily_EVBattery_max);
+                 cat2_EnergyDeliveryPotential_daily(:,k)=min(cat2_EnergyDeliveryPotential_daily_Suplus_max,cat2_EnergyDeliveryPotential_daily_EVBattery_max);
             end
         case 2
             for k = 1:Num_PVOnly

@@ -201,8 +201,11 @@ for h = 1:length(hourly_load)
         end
     end
 
-    % Add station battery's available discharge capacity
-    available_energy = available_energy + min(station_max_power, (station_SOC - station_SOC_min) * station_capacity);
+    % Add station battery's available discharge capacity. A capacity of 0
+    % means no station battery, so it contributes nothing.
+    if station_capacity > 0
+        available_energy = available_energy + min(station_max_power, (station_SOC - station_SOC_min) * station_capacity);
+    end
 
     % Only proceed to supply load if it can be fully met
     if available_energy >= required_energy
@@ -237,7 +240,7 @@ end
         end
 
         % Use station battery if EVs alone are insufficient
-        if energy_supplied < required_energy
+        if energy_supplied < required_energy && station_capacity > 0
             usable_bs = min(station_max_power, (station_SOC - station_SOC_min) * station_capacity);
             bs_deliver = min(usable_bs, required_energy - energy_supplied);
             station_SOC = station_SOC - bs_deliver / station_capacity;
@@ -304,7 +307,7 @@ end
     % Idle EVs at clinic charge station battery if possible
     for ev = find(EV_status == 0)
         usable_energy = (EV_SOC(ev) - SoCEVBmin) * EVB - EV_travel;
-        if usable_energy > 0 && station_SOC < 1.0
+        if usable_energy > 0 && station_SOC < 1.0 && station_capacity > 0
             charge_energy = min([station_max_power, usable_energy, (1.0 - station_SOC) * station_capacity]);
             EV_SOC(ev) = EV_SOC(ev) - charge_energy / (EVB * EV_efficiency);
             station_SOC = station_SOC + charge_energy / station_capacity;

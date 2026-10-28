@@ -132,7 +132,11 @@ for t = 1:total_hours
         ev_unavailable_hours = ceil(travel_time_hr + CHARGING_DURATION_HR) - 1;
         charging_today = true;
 
-        soc_profile(t) = soc_profile(t-1);
+        if t > 1
+            soc_profile(t) = soc_profile(t-1);
+        else
+            soc_profile(t) = INITIAL_SOC;   % recharge trip needed in the first hour
+        end
         available_energy_after_travel = battery_capacity - travel_energy_oneway;
         soc = (available_energy_after_travel / battery_capacity) * 100;
 
@@ -182,7 +186,11 @@ else
 end
 
 total_cost = charging_cost + degradation_cost + travel_cost + hire_cost + driver_cost;
-cost_per_kWh = total_cost / max(1e-6, energy_supplied);
+if energy_supplied > 0
+    cost_per_kWh = total_cost / energy_supplied;
+else
+    cost_per_kWh = NaN;   % undefined when nothing was delivered
+end
 
 % Outage compensation scales with the number of interrupted days. The
 % original model defined 1200 SEK for one day and 2400 SEK for two days;

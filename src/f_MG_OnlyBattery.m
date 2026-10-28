@@ -10,6 +10,19 @@ function  [MG_Esurplus, MG_SoCB, MG_red_demand, MG_cut_prod, MG_B_e_cha_disch_in
     MG_e_discharge_int=zeros(size(MG_supply));
     MG_e_charge_ext=zeros(size(MG_supply));  % used for calculating battery internal SOC and balance
     MG_e_discharge_ext=zeros(size(MG_supply));  % used for calculating the cut down of electricity demand or curtail power surplus.
+    % No community battery: every surplus is curtailed and every deficit is
+    % unmet. Handled separately because the state-of-charge updates below
+    % divide by the capacity.
+    if MG_B <= 0
+        isSurplus = MG_supply > MG_demand;
+        MG_Esurplus(isSurplus) = MG_supply(isSurplus) - MG_demand(isSurplus);
+        MG_cut_prod(isSurplus) = MG_Esurplus(isSurplus);
+        MG_red_demand(~isSurplus) = MG_demand(~isSurplus) - MG_supply(~isSurplus);
+        MG_SoCB(1:numel(MG_supply)+1) = MG_SoCB0;
+        MG_B_e_cha_disch_int = zeros(size(MG_supply));
+        MG_B_e_cha_disch_ext = zeros(size(MG_supply));
+        return;
+    end
 
 %%
     for i = 1:length(MG_supply) % Loop through each hour & ensure loop does not exceed array sizes

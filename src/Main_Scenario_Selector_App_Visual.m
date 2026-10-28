@@ -108,7 +108,7 @@ classdef Main_Scenario_Selector_App_Visual < matlab.apps.AppBase
 
             app.UIFigure = uifigure('Visible','off');
             app.UIFigure.Position = [40 30 1460 930];
-            app.UIFigure.Name = 'EV-Based Energy Resilience Assessment Platform';
+            app.UIFigure.Name = 'EVEN Toolkit';
             app.UIFigure.Color = [0.97 0.98 0.99];
 
             app.HeaderPanel = uipanel(app.UIFigure);
@@ -117,16 +117,16 @@ classdef Main_Scenario_Selector_App_Visual < matlab.apps.AppBase
             app.HeaderPanel.BorderType = 'none';
 
             app.TitleLabel = uilabel(app.HeaderPanel);
-            app.TitleLabel.Position = [40 48 1380 34];
-            app.TitleLabel.Text = 'EV-Based Energy Resilience Assessment Platform';
+            app.TitleLabel.Position = [40 42 1380 46];
+            app.TitleLabel.Text = 'EVEN Toolkit';
             app.TitleLabel.FontSize = 32;
             app.TitleLabel.FontWeight = 'bold';
             app.TitleLabel.FontColor = [1 1 1];
             app.TitleLabel.HorizontalAlignment = 'center';
 
             app.SubtitleLabel = uilabel(app.HeaderPanel);
-            app.SubtitleLabel.Position = [40 17 1380 24];
-            app.SubtitleLabel.Text = 'Select a scenario to open the corresponding technical and economic assessment module';
+            app.SubtitleLabel.Position = [40 12 1380 28];
+            app.SubtitleLabel.Text = 'Electric Vehicle based virtual Electricity Network  |  Select a scenario to open its technical and economic assessment';
             app.SubtitleLabel.FontSize = 17;
             app.SubtitleLabel.FontColor = [0.84 0.92 1];
             app.SubtitleLabel.HorizontalAlignment = 'center';
@@ -249,7 +249,7 @@ classdef Main_Scenario_Selector_App_Visual < matlab.apps.AppBase
 
             app.FooterLabel = uilabel(app.UIFigure);
             app.FooterLabel.Position = [30 25 1400 25];
-            app.FooterLabel.Text = 'Research Simulation Dashboard  |  Residential, Critical Infrastructure, and Community Microgrid Modules';
+            app.FooterLabel.Text = 'EVEN Toolkit v1.0.0  |  Single Family House, Critical Infrastructure and Municipality / Community modules  |  Dalarna University';
             app.FooterLabel.FontSize = 13;
             app.FooterLabel.FontColor = [0.38 0.42 0.48];
             app.FooterLabel.HorizontalAlignment = 'center';

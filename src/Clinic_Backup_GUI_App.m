@@ -159,6 +159,23 @@ classdef Clinic_Backup_GUI_App < matlab.apps.AppBase
                 return;
             end
 
+            % A vehicle starts at its initial state of charge and must keep its
+            % minimum reserve plus the energy for the trip. If the one-way trip
+            % needs more than that, no vehicle can ever supply the clinic.
+            P = even_parameters();
+            usableKWh = (P.clinic.EV_SOC_initial - P.clinic.EV_SOC_min) * EVB;
+            maxTripKm = usableKWh / P.clinic.travel_energy_kWh_per_km;
+            if travel_km >= maxTripKm
+                choice = uiconfirm(app.UIFigure, sprintf(['A %g kWh vehicle can drive at most %.0f km one way ' ...
+                    'and still supply the clinic. At %g km no vehicle can deliver energy, so only the ' ...
+                    'stationary battery will supply the load. Run anyway?'], EVB, maxTripKm, travel_km), ...
+                    'Trip Too Long for EV Battery', 'Options', {'Run anyway', 'Cancel'}, ...
+                    'DefaultOption', 2, 'CancelOption', 2, 'Icon', 'warning');
+                if strcmp(choice, 'Cancel')
+                    return;
+                end
+            end
+
             if N_EVs > 60
                 app.StatusLabel.Text = sprintf(['Running %d EVs. Fleets larger than 60 reuse the same ' ...
                     '60 household solar profiles, so charging opportunities are shared.'], N_EVs);
@@ -686,7 +703,7 @@ classdef Clinic_Backup_GUI_App < matlab.apps.AppBase
         function createComponents(app)
             app.UIFigure = uifigure('Visible', 'off');
             app.UIFigure.Position = [80 80 1250 720];
-            app.UIFigure.Name = 'Clinic EV Backup Simulator';
+            app.UIFigure.Name = 'EVEN Toolkit - Critical Infrastructure';
             app.UIFigure.Color = [1 1 1];
 
             app.HeaderPanel = uipanel(app.UIFigure);
@@ -695,16 +712,16 @@ classdef Clinic_Backup_GUI_App < matlab.apps.AppBase
             app.HeaderPanel.BorderType = 'none';
 
             app.TitleLabel = uilabel(app.HeaderPanel);
-            app.TitleLabel.Position = [30 52 1190 35];
-            app.TitleLabel.Text = 'Vehicle-to-Clinic Economic and Technical Assessment';
+            app.TitleLabel.Position = [30 50 1190 40];
+            app.TitleLabel.Text = 'Critical Infrastructure: EV Fleet Backup for a Health Clinic';
             app.TitleLabel.FontSize = 25;
             app.TitleLabel.FontWeight = 'bold';
             app.TitleLabel.FontColor = [1 1 1];
             app.TitleLabel.HorizontalAlignment = 'center';
 
             app.SubtitleLabel = uilabel(app.HeaderPanel);
-            app.SubtitleLabel.Position = [30 22 1190 25];
-            app.SubtitleLabel.Text = 'Long-term Critical Infrastructure Backup Simulation Dashboard';
+            app.SubtitleLabel.Position = [30 18 1190 26];
+            app.SubtitleLabel.Text = 'EVEN Toolkit  |  Long-term backup by an EV fleet with solar and a stationary battery, compared with diesel';
             app.SubtitleLabel.FontSize = 14;
             app.SubtitleLabel.FontColor = [0.85 0.92 1];
             app.SubtitleLabel.HorizontalAlignment = 'center';

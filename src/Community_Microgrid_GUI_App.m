@@ -607,10 +607,10 @@ classdef Community_Microgrid_GUI_App < matlab.apps.AppBase
 
         function createComponents(app)
             navy=[0.02 0.16 0.32]; blue=[0.00 0.45 0.74]; green=[0.10 0.55 0.20]; orange=[0.90 0.50 0.10];
-            app.UIFigure=uifigure('Visible','off','Position',[60 50 1320 780],'Name','Community Microgrid Resilience Simulator','Color',[1 1 1]);
+            app.UIFigure=uifigure('Visible','off','Position',[60 50 1320 780],'Name','EVEN Toolkit - Municipality / Community','Color',[1 1 1]);
             app.HeaderPanel=uipanel(app.UIFigure,'Position',[0 680 1320 100],'BackgroundColor',navy,'BorderType','none');
-            app.TitleLabel=uilabel(app.HeaderPanel,'Position',[30 52 1260 35],'Text','EV-Based Community Microgrid Resilience Assessment','FontSize',25,'FontWeight','bold','FontColor',[1 1 1],'HorizontalAlignment','center');
-            app.SubtitleLabel=uilabel(app.HeaderPanel,'Position',[30 20 1260 25],'Text','Long-term Municipality and EV-Based Virtual Electricity Network Dashboard','FontSize',14,'FontColor',[0.85 0.92 1],'HorizontalAlignment','center');
+            app.TitleLabel=uilabel(app.HeaderPanel,'Position',[30 50 1260 40],'Text','Municipality / Community: EV-Based Virtual Electricity Network','FontSize',25,'FontWeight','bold','FontColor',[1 1 1],'HorizontalAlignment','center');
+            app.SubtitleLabel=uilabel(app.HeaderPanel,'Position',[30 18 1260 26],'Text','EVEN Toolkit  |  Annual community energy sharing between households, a microgrid and electric vehicles','FontSize',14,'FontColor',[0.85 0.92 1],'HorizontalAlignment','center');
             app.TabGroup=uitabgroup(app.UIFigure,'Position',[20 55 1280 610]);
             app.SingleTab=uitab(app.TabGroup,'Title','Community Scenario','BackgroundColor',[1 1 1]);
             app.OverallTab=uitab(app.TabGroup,'Title','Overall Performance','BackgroundColor',[1 1 1]);

@@ -153,6 +153,20 @@ classdef V2H_GUI_App < matlab.apps.AppBase
                 return;
             end
 
+            % The one-way trip to the charging point must leave some usable
+            % energy above the minimum state of charge, otherwise the vehicle
+            % can never supply the house.
+            P = even_parameters();
+            usableKWh = battery_kWh * (P.v2h.initial_SOC_pct - P.v2h.min_SOC_pct) / 100;
+            maxTripKm = usableKWh / P.v2h.travel_energy_kWh_per_km;
+            if distance_km >= maxTripKm
+                uialert(app.UIFigure, sprintf(['A %g kWh vehicle keeps a %g %% reserve, so it can drive at most ' ...
+                    '%.0f km one way to the charging point. A %g km trip leaves no energy for the house. ' ...
+                    'Choose a shorter distance or a larger battery.'], battery_kWh, P.v2h.min_SOC_pct, ...
+                    maxTripKm, distance_km), 'Trip Too Long for Battery');
+                return;
+            end
+
             try
                 result = V2H_EconomicSimulator_HourlySOC( ...
                     ownership, battery_kWh, app.load_profile, outage_days, distance_km);
@@ -208,7 +222,7 @@ classdef V2H_GUI_App < matlab.apps.AppBase
                 };
 
                 economicValues = {
-                    sprintf('%.2f', result.total_cost_per_kWh)
+                    app.formatCostPerKWh(result.total_cost_per_kWh, '%.2f')
                     sprintf('%.2f', result.total_cost)
                     sprintf('%.2f', result.driver_cost)
                     sprintf('%.2f', result.hire_cost)
@@ -232,7 +246,7 @@ classdef V2H_GUI_App < matlab.apps.AppBase
                     'VariableNames', {'Economic Parameter', 'Value', 'Unit'});
 
                 app.KPI1Value.Text = sprintf('%.1f %%', result.supply_availability * 100);
-                app.KPI2Value.Text = sprintf('%.2f SEK/kWh', result.total_cost_per_kWh);
+                app.KPI2Value.Text = app.formatCostPerKWh(result.total_cost_per_kWh, '%.2f SEK/kWh');
                 app.KPI3Value.Text = sprintf('%.0f', result.charge_cycles_used);
                 app.KPI4Value.Text = sprintf('%.1f kWh', result.total_energy_supplied);
 
@@ -275,6 +289,15 @@ classdef V2H_GUI_App < matlab.apps.AppBase
                 val = round(val);
             end
             ok = true;
+        end
+
+        function txt = formatCostPerKWh(app, value, fmt) %#ok<INUSL>
+            % Cost per kWh is undefined when no energy was delivered.
+            if isnan(value)
+                txt = 'n/a (nothing delivered)';
+            else
+                txt = sprintf(fmt, value);
+            end
         end
 
         function plotSingleScenario(app, result)
@@ -1053,7 +1076,7 @@ classdef V2H_GUI_App < matlab.apps.AppBase
 
             app.UIFigure = uifigure('Visible', 'off');
             app.UIFigure.Position = [80 80 1250 720];
-            app.UIFigure.Name = 'V2H Economic Simulator';
+            app.UIFigure.Name = 'EVEN Toolkit - Single Family House';
             app.UIFigure.Color = [1 1 1];
            
             app.HeaderPanel = uipanel(app.UIFigure);
@@ -1062,16 +1085,16 @@ classdef V2H_GUI_App < matlab.apps.AppBase
             app.HeaderPanel.BorderType = 'none';
 
             app.TitleLabel = uilabel(app.HeaderPanel);
-            app.TitleLabel.Position = [30 52 1190 35];
-            app.TitleLabel.Text = 'Vehicle-to-Home Economic and Technical Assessment';
+            app.TitleLabel.Position = [30 50 1190 40];
+            app.TitleLabel.Text = 'Single Family House: Vehicle-to-Home Backup';
             app.TitleLabel.FontSize = 25;
             app.TitleLabel.FontWeight = 'bold';
             app.TitleLabel.FontColor = [1 1 1];
             app.TitleLabel.HorizontalAlignment = 'center';
 
             app.SubtitleLabel = uilabel(app.HeaderPanel);
-            app.SubtitleLabel.Position = [30 22 1190 25];
-            app.SubtitleLabel.Text = 'Short-term Residential Backup Simulation Dashboard';
+            app.SubtitleLabel.Position = [30 18 1190 26];
+            app.SubtitleLabel.Text = 'EVEN Toolkit  |  Short-term residential backup from one electric vehicle during an outage';
             app.SubtitleLabel.FontSize = 14;
             app.SubtitleLabel.FontColor = [0.85 0.92 1];
             app.SubtitleLabel.HorizontalAlignment = 'center';
