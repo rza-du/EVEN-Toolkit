@@ -176,8 +176,8 @@ r = V2H_EconomicSimulator_HourlySOC('Personal', 77, loadVec, 2, 10, P);
 ```
 
 ## Related publications
-1. Zafar R, Indatissa A. S., Huang P.*, Lane A.L., Björnsson L.H. Techno-economic assessment of electric vehicle-based decentralized electricity delivery for enhanced power resilience during outages. Energy Reports, 15, 108647. 
-2. Huang P.*, Kidanemariam A., Björnsson L.H. (2024). Transforming electric vehicles into mobile power sources: technical performance evaluation of the electric vehicle based virtual electricity network (EVEN) solution for improving the power supply resilience. Sustainable Cities and Society, 128, 106477.
+1. Zafar, R., Indatissa, A. S., Huang, P., Lane, A. L., & Björnsson, B. H. (2026). Techno-economic assessment of electric vehicle-based decentralized electricity delivery for enhanced power resilience during outages. Energy Reports, 15, 108947. 
+2. Huang, P., Kidanemariam, A., & Bjornsson, L. H. (2025). Transforming electric vehicles into mobile power sources: technical performance evaluation of the electric vehicle based virtual electricity network (EVEN) solution for improving the power supply resilience. Sustainable cities and society, 128, 106477.
 
 ## Contact
 
