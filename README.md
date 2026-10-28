@@ -4,6 +4,23 @@
 
 A MATLAB application suite for techno-economic assessment of electric-vehicle-based backup power at three scales: a single household, a critical facility, and a community microgrid.
 
+<p align="center">
+  <img src="docs/images/selector.png" alt="EVEN Toolkit scenario selector" width="85%">
+</p>
+
+<table>
+  <tr>
+    <td align="center" width="33%"><img src="docs/images/household.png" alt="Single Family House module" width="100%"></td>
+    <td align="center" width="33%"><img src="docs/images/clinic.png" alt="Critical Infrastructure module" width="100%"></td>
+    <td align="center" width="33%"><img src="docs/images/community.png" alt="Municipality / Community module" width="100%"></td>
+  </tr>
+  <tr>
+    <td align="center"><b>Single Family House</b><br>Vehicle-to-home backup</td>
+    <td align="center"><b>Critical Infrastructure</b><br>EV fleet backup for a clinic</td>
+    <td align="center"><b>Municipality / Community</b><br>Annual energy sharing</td>
+  </tr>
+</table>
+
 
 ## What it does
 
@@ -158,16 +175,21 @@ P.v2h.charging_cost_SEK_per_kWh = 3.20;
 r = V2H_EconomicSimulator_HourlySOC('Personal', 77, loadVec, 2, 10, P);
 ```
 
-## Citing this software
-
-
 ## Related publications
+1. Zafar R, Indatissa A. S., Huang P.*, Lane A.L., Björnsson L.H. Techno-economic assessment of electric vehicle-based decentralized electricity delivery for enhanced power resilience during outages. Energy Reports, 15, 108647. 
+2. Huang P.*, Kidanemariam A., Björnsson L.H. (2024). Transforming electric vehicles into mobile power sources: technical performance evaluation of the electric vehicle based virtual electricity network (EVEN) solution for improving the power supply resilience. Sustainable Cities and Society, 128, 106477.
 
+## Contact
+
+Rehman Zafar, Dalarna University [rza@du.se] and Pei Huang, Mälardalens University [pei.huang@mdu.se]
 
 ## Licence
 
 MIT — see [LICENSE](LICENSE). The toolkit contains no third-party code.
 
-## Contact
+## Acknowledgement
+
+This work was supported by the Energimyndigheten (Sweden Energy Agency) [Grant number: 2023–00498].
+
 
 
