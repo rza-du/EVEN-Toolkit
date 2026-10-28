@@ -5,14 +5,14 @@
 A MATLAB application suite for techno-economic assessment of electric-vehicle-based backup power at three scales: a single household, a critical facility, and a community microgrid.
 
 <p align="center">
-  <img src="docs/images/selector.png" alt="EVEN Toolkit scenario selector" width="85%">
+  <img src="docs/selector.png" alt="EVEN Toolkit scenario selector" width="85%">
 </p>
 
 <table>
   <tr>
-    <td align="center" width="33%"><img src="docs/images/household.png" alt="Single Family House module" width="100%"></td>
-    <td align="center" width="33%"><img src="docs/images/clinic.png" alt="Critical Infrastructure module" width="100%"></td>
-    <td align="center" width="33%"><img src="docs/images/community.png" alt="Municipality / Community module" width="100%"></td>
+    <td align="center" width="33%"><img src="docs/household.png" alt="Single Family House module" width="100%"></td>
+    <td align="center" width="33%"><img src="docs/clinic.png" alt="Critical Infrastructure module" width="100%"></td>
+    <td align="center" width="33%"><img src="docs/community.png" alt="Municipality / Community module" width="100%"></td>
   </tr>
   <tr>
     <td align="center"><b>Single Family House</b><br>Vehicle-to-home backup</td>
