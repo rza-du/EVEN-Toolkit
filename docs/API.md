@@ -176,9 +176,6 @@ deficitAfter  = 100*nnz(R.Output_daily_EBalance_after <0)/numel(R.Output_daily_E
 meanDegradation = 100*mean(R.Degradation);
 ```
 
-A full-size run covers 5357 households over 365 days and is slow. Use the 400-household demo dataset in `input_files/community/` while developing.
-
----
 
 ## `even_run_parametric`
 
