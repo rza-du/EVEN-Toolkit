@@ -26,4 +26,4 @@ The subset runs with every feature of the community module, including the parame
 
 ## Using your own data
 
-Save a variable with the shape given in the table above and select the file through the module's upload dialog. The household module accepts any variable name matching load_profile, household_demand, load or demand; the clinic and community modules expect the variable names listed above, though the clinic module will also accept a file containing exactly one numeric variable.
+Save a variable with the shape given in the table above and select the file through the module's upload dialog. The household module accepts any variable name matching `load_profile`, `household_demand`, `load` or `demand`; the clinic and community modules expect the variable names listed above, though the clinic module will also accept a file containing exactly one numeric variable.
