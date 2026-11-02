@@ -20,21 +20,14 @@ README naming the upload button for every file.
 
 ## The reduced community dataset
 
-The full community dataset covers 5357 households in the case municipality.
-At that size each of the two household files is larger than GitHub's 100 MB
-per-file limit, so this repository ships a 400-household subset instead.
+The full community dataset covers 5357 households in the case municipality and is not publicly available. This repository therefore ships a 400-household subset (`HH_Load_demo400.mat` and `HH_PV_supply2_demo400.mat`) with the same file format and variables.
 
-The subset runs correctly and reproduces the structure of the results, but
-the absolute annual energy figures are smaller than those in the published
-study, because the community is smaller. The number of simulated households
-is `round(400 * EV_penetration)` rather than `round(5357 * EV_penetration)`.
-
+The subset runs with every feature of the community module, including the parametric studies. Because the community is smaller and has a different household mix, absolute results differ from those reported for the full municipality in the published study. The number of simulated households is `round(400 * EV_penetration)` rather than `round(5357 * EV_penetration)`, for example 20 households at 5 % EV penetration and 200 at 50 %.
 
 ## Using your own data
 
-Save a variable with the shape given in the table above and select the file
-through the module's upload dialog. The household module accepts any
-variable name matching `load_profile`, `household_demand`, `load` or
-`demand`; the clinic and community modules expect the variable names listed
-above, though the clinic module will also accept a file containing exactly
-one numeric variable.
+Save a variable with the shape given in the table above and select the file through the module's upload dialog.
+
+- **Household module:** accepts a variable named `load_profile`, `loadProfile`, `LoadProfile`, `household_load`, `household_demand`, `load`, `Load` or `demand`.
+- **Clinic module:** expects `clinic_load_scaled` in the clinic file and `hourly_excess_60` in the solar file. Either file may instead contain exactly one numeric variable, whatever its name.
+- **Community module:** expects the variable names listed above.
